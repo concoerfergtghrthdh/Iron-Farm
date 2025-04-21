@@ -22,6 +22,11 @@ jobs:
       - name: 📥 Download bot script
         run: wget -O index.js https://raw.githubusercontent.com/concoerfergtghrthdh/Iron-Farm/refs/heads/main/index.js
 
+      - name: 📦 Create package.json
+        run: |
+          npm init -y
+          npm install bedrock-protocol
+
       - name: 🚀 Run the bot
         run: node index.js
         env:
