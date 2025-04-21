@@ -19,10 +19,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: 📦 Download bot & install dependencies
-        run: |
-          wget -O index.js https://raw.githubusercontent.com/concoerfergtghrthdh/Iron-Farm/refs/heads/main/index.js
-          npm install
+      - name: 📥 Download bot script
+        run: wget -O index.js https://raw.githubusercontent.com/concoerfergtghrthdh/Iron-Farm/refs/heads/main/index.js
 
       - name: 🚀 Run the bot
         run: node index.js
