@@ -17,11 +17,12 @@ jobs:
       - name: ⚙️ Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20' # or the version you need
+          node-version: '20'
 
-      - name: 📦 Install dependencies
-        run: wget -O index.js https://raw.githubusercontent.com/concoerfergtghrthdh/Iron-Farm/refs/heads/main/index.js
-        run: npm install
+      - name: 📦 Download bot & install dependencies
+        run: |
+          wget -O index.js https://raw.githubusercontent.com/concoerfergtghrthdh/Iron-Farm/refs/heads/main/index.js
+          npm install
 
       - name: 🚀 Run the bot
         run: node index.js
