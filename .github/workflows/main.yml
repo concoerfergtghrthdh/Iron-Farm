@@ -1,0 +1,29 @@
+name: Run Bedrock Bot
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # or the version you need
+
+      - name: 📦 Install dependencies
+        run: wget -O index.js https://raw.githubusercontent.com/concoerfergtghrthdh/Iron-Farm/refs/heads/main/index.js
+        run: npm install
+
+      - name: 🚀 Run the bot
+        run: node index.js
+        env:
+          NODE_ENV: production
