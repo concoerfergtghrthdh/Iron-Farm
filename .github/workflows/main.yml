@@ -25,7 +25,7 @@ jobs:
       - name: 📦 Create package.json
         run: |
           npm init -y
-          npm install bedrock-protocol
+          npm install bedrock-protocol@latest
 
       - name: 🚀 Run the bot
         run: node index.js
