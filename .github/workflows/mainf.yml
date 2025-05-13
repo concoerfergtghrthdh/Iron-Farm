@@ -1,0 +1,4 @@
+- name: 📦 Install dependencies
+  run: |
+    npm install bedrock-protocol@latest
+    npm update --depth 9999
