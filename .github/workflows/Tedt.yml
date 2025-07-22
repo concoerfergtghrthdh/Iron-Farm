@@ -1,49 +1,33 @@
-name: Minecraft Bedrock Bot Test
+name: Run KOT
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
-  join-server:
+  run-bot:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+      - name: ⚙️ Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-    - name: Install bedrock-protocol
-      run: npm install bedrock-protocol
+      - name: 📥 Download bot script
+        run: wget -O index.js https://raw.githubusercontent.com/concoerfergtghrthdh/Iron-Farm/refs/heads/main/index.js
 
-    - name: Run Bot
-      run: |
-        cat << 'EOF' > bot.js
-        const { createClient } = require('bedrock-protocol');
+      - name: 📦 Create package.json
+        run: |
+          npm init -y
+          npm install bedrock-protocol@latest
 
-        const client = createClient({
-          host: 'omertauhid.aternos.me', // replace with IP
-          port: 45001, // or your custom port
-          username: 'GitHubBot',
-          version: '1.21.72',
-        });
-
-        client.on('join', () => {
-          console.log('Joined server');
-        });
-
-        client.on('disconnect', (reason) => {
-          console.log('Disconnected:', reason);
-        });
-
-        // Stay for 15 minutes
-        setTimeout(() => {
-          console.log('Leaving server...');
-          client.disconnect('Timeout done');
-        }, 15 * 60 * 1000);
-        EOF
-
-        node bot.js
+      - name: 🚀 Run the bot
+        run: node KOT.js
+        env:
+          NODE_ENV: production
